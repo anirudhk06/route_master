@@ -1,11 +1,12 @@
 name: route-master
+version: '3.8'
 
 services:
   app:
     build: .
     image: django-image
     container_name: dj-container
-    command: /app/entrypoint.sh
+    command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - .env
     ports:
@@ -28,7 +29,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     restart: unless-stopped
     volumes:
-      - postgres_data:var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
